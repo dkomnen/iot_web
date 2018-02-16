@@ -1,12 +1,13 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from bson.json_util import dumps
 import datetime
-from config import Config
+from config.Config import Config
 
 
 class BaseModel(object):
 
-    db_name = "distribooted"
+    db_name = "heimdall"
     collection_name = None
 
     def __init__(self):
@@ -20,7 +21,7 @@ class BaseModel(object):
         self.client = MongoClient(self.host)
         self.db = self.client[self.db_name]
 
-        self.db.authenticate(self.mongo_user, self.mongo_pass)
+        #self.db.authenticate(self.mongo_user, self.mongo_pass)
 
         self.collection = self.db[self.collection_name]
 
@@ -31,7 +32,7 @@ class BaseModel(object):
         return obj
 
     def get_all(self):
-        return self.find({})
+        return self.as_dict(self.find({}))
 
     def find(self, condition, skip=0, limit=0):
         return self.collection.find(condition, skip=skip, limit=limit)
@@ -129,3 +130,6 @@ class BaseModel(object):
             condition = {"_id": ObjectId(condition_or_id)}
 
         return self.collection.update(condition, {'$inc': {field: amount}})
+
+    def as_dict(self, data):
+        return dumps(data)
