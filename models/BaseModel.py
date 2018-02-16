@@ -26,10 +26,10 @@ class BaseModel(object):
         self.collection = self.db[self.collection_name]
 
     def create(self, data):
-        data["created_at"] = datetime.datetime.now()
+        #data["created_at"] = datetime.datetime.now()
         cr_obj = self.collection.insert_one(data)
         obj = self.find_by_id(cr_obj.inserted_id)
-        return obj
+        return self.as_dict(obj)
 
     def get_all(self):
         return self.as_dict(self.find({}))

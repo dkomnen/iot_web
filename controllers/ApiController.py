@@ -1,5 +1,6 @@
 from server import api
-from flask_restful import Resource, request
+from flask import request
+from flask_restful import Resource
 from models.VikingModel import Viking
 
 
@@ -9,7 +10,7 @@ class HelloWorld(Resource):
         print Viking().get_all()
         return Viking().get_all()
 
-    def post(self, data):
+    def post(self):
         request_data = request.get_json()
         return Viking().create(request_data)
 
