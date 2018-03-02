@@ -6,4 +6,4 @@ class VikingService(BaseService):
 
     def __init__(self):
         super(VikingService, self).__init__()
-        self.model = Viking()
+        self.model = Viking

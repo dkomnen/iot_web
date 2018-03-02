@@ -1,4 +1,4 @@
-
+import json
 
 class BaseService(object):
 
@@ -10,4 +10,5 @@ class BaseService(object):
         pass
 
     def get_all(self):
-        return self.model.get_all()
+        return self.model.objects.to_json()
+

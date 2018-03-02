@@ -1,2 +1,6 @@
 flask
 flask-login
+flask-mongoengine
+
+pymongo
+mongoengine

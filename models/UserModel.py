@@ -1,10 +1,7 @@
-from BaseModel import BaseModel
+from mongoengine import *
 
 
-class UserModel(BaseModel):
+class UserModel(DynamicDocument):
 
-    collection_name = "user"
-
-    def __init__(self):
-        super(UserModel, self).__init__()
+    meta = {"collection": "user"}
 
