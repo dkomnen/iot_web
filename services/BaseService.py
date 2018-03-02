@@ -10,5 +10,6 @@ class BaseService(object):
         pass
 
     def get_all(self):
+        print self.model.objects.to_json()
         return self.model.objects.to_json()
 

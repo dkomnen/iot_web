@@ -2,6 +2,9 @@ from flask import Flask
 from flask_restful import Resource, Api
 from flask_login import LoginManager
 from flask_mongoengine import MongoEngine
+from flask_security import Security, MongoEngineUserDatastore
+from models.UserModel import User
+from models.RoleModel import Role
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 api = Api(app)
@@ -18,7 +21,14 @@ app.config['MONGODB_SETTINGS'] = {
     "port": 27017
 
 }
+app.config['TEMPLATE_FOLDER'] = "../templates"
+app.config['STATIC_FOLDER'] = "../static"
+app.config['SECURITY_REGISTERABLE'] = True
+app.config['SECURITY_PASSWORD_SALT'] = "randomsalt"
+app.config['SECURITY_CONFIRMABLE'] = False
 db = MongoEngine(app)
+user_datastore = MongoEngineUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
 
 
 from controllers import ApiController, ViewController
