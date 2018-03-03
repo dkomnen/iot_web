@@ -1,5 +1,6 @@
 from mongoengine import *
 from models.RoleModel import Role
+from models.DeviceModel import Device
 
 
 class User(Document):
@@ -9,6 +10,7 @@ class User(Document):
     active = BooleanField(default=True)
     #confirmed_at = db.DateTimeField()
     roles = ListField(ReferenceField(Role), default=[])
+    devices = ListField(EmbeddedDocumentField(Device))
 
     meta = {"collection": "user"}
 
