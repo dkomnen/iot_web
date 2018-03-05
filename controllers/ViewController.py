@@ -1,12 +1,15 @@
 from server import app
 from flask import render_template
 from flask_security import login_required
+from models.VikingModel import Viking
 
 
 @app.route("/")
 #@login_required
 def index():
-    return render_template("index.html")
+    vikings = Viking.objects
+    print vikings
+    return render_template("index.html", vikings=vikings)
 
 
 @app.route("/login")
