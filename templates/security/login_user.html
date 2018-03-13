@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% include 'includes/head.html' %}
+
+    <style>
+        body {
+          padding-top: 40px;
+          padding-bottom: 40px;
+          background-color: #eee;
+        }
+
+        .form-signin {
+          max-width: 330px;
+          padding: 15px;
+          margin: 0 auto;
+        }
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+          margin-bottom: 10px;
+        }
+        .form-signin .checkbox {
+          font-weight: normal;
+        }
+        .form-signin .form-control {
+          position: relative;
+          height: auto;
+          -webkit-box-sizing: border-box;
+                  box-sizing: border-box;
+          padding: 10px;
+          font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+          z-index: 2;
+        }
+        .form-signin input[type="email"] {
+          margin-bottom: -1px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+          margin-bottom: 10px;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!--<div class="container">-->
+
+      <!--<form class="form-signin">-->
+        <!--<h2 class="form-signin-heading">Please sign in</h2>-->
+        <!--<label for="inputEmail" class="sr-only">Email address</label>-->
+        <!--<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">-->
+        <!--<label for="inputPassword" class="sr-only">Password</label>-->
+        <!--<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">-->
+        <!--<div class="checkbox">-->
+          <!--<label>-->
+            <!--<input type="checkbox" value="remember-me"> Remember me-->
+          <!--</label>-->
+        <!--</div>-->
+        <!--<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+      <!--</form>-->
+
+    <!--</div> &lt;!&ndash; /container &ndash;&gt;-->
+
+
+    <!--&lt;!&ndash; Bootstrap core JavaScript-->
+    <!--================================================== &ndash;&gt;-->
+    <!--&lt;!&ndash; Placed at the end of the document so the pages load faster &ndash;&gt;-->
+    <!--&lt;!&ndash; IE10 viewport hack for Surface/desktop Windows 8 bug &ndash;&gt;-->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+
+
+<h1>Login</h1>
+<form action="/login" method="POST" name="login_user_form">
+  <input id="next" name="next" type="hidden" value="">
+<input id="csrf_token" name="csrf_token" type="hidden" value="ImI3YjBmYzc0ZjU0N2IwYTU5MzIxOGQ2NzMxNTllZjYyNTczZjQ1MDAi.DYl6Vg.xp4OGXL5Ne2GW0akf63FTJ-vsAc">
+
+  <p>
+    <label for="email">Email Address</label> <input id="email" name="email" type="text" value="">
+
+  </p>
+
+
+  <p>
+    <label for="password">Password</label> <input id="password" name="password" type="password" value="">
+
+  </p>
+
+
+  <p>
+    <label for="remember">Remember Me</label> <input id="remember" name="remember" type="checkbox" value="y">
+
+  </p>
+
+
+  <p><input id="next" name="next" type="hidden" value=""></p>
+
+
+  <p><input id="submit" name="submit" type="submit" value="Login"></p>
+
+</form>
+
+<h2>Menu</h2>
+<ul>
+  <li><a href="/login">Login</a></li>
+
+  <li><a href="/register">Register</a><br></li>
+
+
+
+</ul>
+
+</body>
+</html>
