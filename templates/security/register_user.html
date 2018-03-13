@@ -5,41 +5,61 @@
 
 </head>
 <body>
-<h1>Register</h1>
-<form action="/register" method="POST" name="register_user_form">
-  <input id="next" name="next" type="hidden" value="">
-<input id="csrf_token" name="csrf_token" type="hidden" value="ImI3YjBmYzc0ZjU0N2IwYTU5MzIxOGQ2NzMxNTllZjYyNTczZjQ1MDAi.DYl6iw.4BAEXStvFVhpk6DU299W0_JzE4Y">
+<!--<h1>Register</h1>-->
+<!--<form action="/register" method="POST" name="register_user_form">-->
+<!--<input id="next" name="next" type="hidden" value="">-->
+<!--<input id="csrf_token" name="csrf_token" type="hidden" value="ImI3YjBmYzc0ZjU0N2IwYTU5MzIxOGQ2NzMxNTllZjYyNTczZjQ1MDAi.DYl6iw.4BAEXStvFVhpk6DU299W0_JzE4Y">-->
 
-  <p>
-    <label for="email">Email Address Test</label> <input id="email" name="email" type="text" value="">
+<!--<p>-->
+<!--<label for="email">Email Address Test</label> <input id="email" name="email" type="text" value="">-->
 
-  </p>
-
-
-  <p>
-    <label for="password">Password</label> <input id="password" name="password" type="password" value="">
-
-  </p>
+<!--</p>-->
 
 
+<!--<p>-->
+<!--<label for="password">Password</label> <input id="password" name="password" type="password" value="">-->
 
-  <p>
-    <label for="password_confirm">Retype Password</label> <input id="password_confirm" name="password_confirm" type="password" value="">
-
-  </p>
-
+<!--</p>-->
 
 
-  <p><input id="submit" name="submit" type="submit" value="Register"></p>
+<!--<p>-->
+<!--<label for="password_confirm">Retype Password</label> <input id="password_confirm" name="password_confirm" type="password" value="">-->
 
+<!--</p>-->
+
+
+<!--<p><input id="submit" name="submit" type="submit" value="Register"></p>-->
+
+<!--</form>-->
+
+<!--<h2>Menu</h2>-->
+<!--<ul>-->
+<!--<li><a href="/login">Login</a></li>-->
+
+<!--<li><a href="/register">Register</a><br></li>-->
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+<h1>{{ _('Register') }}</h1>
+<form action="{{ url_for_security('register') }}" method="POST" name="register_user_form" class="form-signin">
+    {{ register_user_form.hidden_tag() }}
+    <div class="form-group">
+        <label for="email">Email address</label>
+        {{ register_user_form.email(class='form-control', placeholder='email address') }}
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        {{ register_user_form.password(class='form-control', placeholder='password') }}
+    </div>
+    <div class="form-group">
+        <label for="password_confirm">Retype password</label>
+        {% if register_user_form.password_confirm %}
+        {{ register_user_form.password_confirm(class='form-control', placeholder='password') }}
+        {% endif %}
+    </div>
+
+    {{ register_user_form.submit(class='btn btn-lg btn-primary btn-block') }}
 </form>
-
-<h2>Menu</h2>
-<ul>
-  <li><a href="/login">Login</a></li>
-
-  <li><a href="/register">Register</a><br></li>
-
+{% include "security/_menu.html" %}
 
 
 </ul>
