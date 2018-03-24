@@ -1,4 +1,3 @@
-#from server import db
 from mongoengine import *
 from flask_security import RoleMixin
 

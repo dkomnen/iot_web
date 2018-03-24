@@ -10,7 +10,7 @@ class User(Document):
     active = BooleanField(default=True)
     #confirmed_at = db.DateTimeField()
     roles = ListField(ReferenceField(Role), default=[])
-    #devices = ListField(EmbeddedDocumentField(Device))
+    devices = ListField(ReferenceField(Device), default=[])
 
     meta = {"collection": "user"}
 

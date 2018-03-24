@@ -1,4 +1,4 @@
-import json
+from bson import json_util
 import datetime
 
 class BaseService(object):
@@ -11,10 +11,15 @@ class BaseService(object):
         pass
 
     def get_all(self):
-        print self.model.objects.to_json()
+        print "HI"
+        #print self.model.objects.to_json()
         response = []
-        for viking in self.model.objects:
-            viking.timestamp = datetime.datetime.fromtimestamp(viking.timestamp).strftime('%c')
-            response.append(viking)
-        return self.model.objects.to_json()
+
+        for viking in self.model.objects.paginate(page=1, per_page=10).items:
+            #viking.timestamp = datetime.datetime.fromtimestamp(viking.timestamp).strftime('%c')
+            response.append(json_util.dumps(vars(viking)))
+        print json_util.dumps(response[0])
+        print json_util._json_convert(response[0])
+        return response
+        #return self.model.objects.all()
 

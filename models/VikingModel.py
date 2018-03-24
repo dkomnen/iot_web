@@ -1,14 +1,13 @@
 from BaseModel import BaseModel
-from mongoengine import *
-from config.Config import Config
+from flask_mongoengine import MongoEngine
+#from server import db
 
+db = MongoEngine()
 
-class Viking(DynamicDocument):
+class Viking(db.DynamicDocument):
 
     #collection_name = "viking"
-    payload = StringField()
+    payload = db.StringField()
     meta = {"collection": "viking"}
 
-    # def __init__(self):
-    #     super(Viking, self).__init__()
 
