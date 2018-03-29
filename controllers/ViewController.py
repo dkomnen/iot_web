@@ -5,7 +5,7 @@ from models.VikingModel import Viking
 
 
 @app.route("/")
-#@login_required
+# @login_required
 def index():
     vikings = Viking.objects
     print vikings
@@ -17,6 +17,6 @@ def login():
     return render_template("security/login_user.html")
 
 
-# @app.route('/register', methods=['GET', 'POST'])
-# def register_test():
-#     return render_template("security/register_user.html")
+    # @app.route('/register', methods=['GET', 'POST'])
+    # def register_test():
+    #     return render_template("security/register_user.html")
