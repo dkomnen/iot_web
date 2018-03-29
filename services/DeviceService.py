@@ -11,4 +11,4 @@ class DeviceService(BaseService):
         serial_number = data['serial_number']
         name = data['name']
 
-        return self.model(serial_number=serial_number, name=name).save().to_json()
+        return self.model(serial_number=serial_number, name=name).save()

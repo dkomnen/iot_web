@@ -1,10 +1,10 @@
 from services.BaseService import BaseService
-from models.UserModel import UserModel
+from models.UserModel import User
 
 
 class UserService(BaseService):
 
     def __init__(self):
         super(UserService, self).__init__()
-        self.model = UserModel()
+        self.model = User
 
