@@ -12,7 +12,8 @@ class VikingResource(BaseResource):
         self.resource_service = VikingService()
 
     def get(self, resource_id=None):
-        return response_handler.success(response_data=self.resource_service.get_all())
+        #return response_handler.success(response_data=self.resource_service.get_all())
+        return self.resource_service.get_all()
 
     def post(self):
         #request_data = request.get_json()

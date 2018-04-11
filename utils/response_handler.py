@@ -1,5 +1,6 @@
 from flask import Response
 import json
+from bson import json_util
 
 
 class ResponseHandler(object):
@@ -23,7 +24,7 @@ class ResponseHandler(object):
 
     @staticmethod
     def success(response_data, response_status=STATUS_OK):
-        resp = Response(response=json.dumps(response_data), status=response_status, mimetype='application/json')
+        resp = Response(response=json_util.dumps(response_data), status=response_status, mimetype='application/json')
         resp.headers['Access-Control-Allow-Origin'] = '*'
 
         return resp
