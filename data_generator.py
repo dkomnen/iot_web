@@ -23,26 +23,14 @@ full_data = {
     "data": []
 }
 
-# while startTime < epochTime:
-temp_data = []
-#temp_time = startTime
 while startTime < epochTime:
-    temp_data.append({
+    data = {
         "timestamp": startTime,
-        "temperature": getRandomFloat()
-    })
-    startTime += 60
-data = {
-    "start_timestamp": startTime,
-    "end_timestamp": startTime + 600,
-    "temperature": temp_data,
-    "unit": "c",
-    "serial_number": "0000000000000000000000000000000000000000000000000000000000000001"
+        "temperature": getRandomFloat(),
+        "unit": "c",
+        "serial_number": "2"
 
-}
-startTime += 60
-print "1"
-full_data['data'].append(data)
+    }
+    startTime += 600
+    r = requests.post("http://localhost:5000/api/viking", json=data)
 
-# viking.create(data)
-r = requests.post("http://localhost:5000/api/viking", json=full_data)

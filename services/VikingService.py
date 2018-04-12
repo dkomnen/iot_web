@@ -10,11 +10,9 @@ class VikingService(BaseService):
     def get_all(self):
         response = []
         data = []
-        for viking in self.model.objects.all():
-            data.append(self.get_average_data(viking))
-        print self.model.objects.all()
+        # print self.model.objects.all()
 
-        return data
+        return self.model.objects.all()
 
     def get_average_data(self, viking):
         data_sum = 0
@@ -25,16 +23,26 @@ class VikingService(BaseService):
             data_sum += data['temperature']
         return data_sum / counter
 
+    def get_graph_data(self, device_ids):
+        data = {}
+        for device_id in device_ids:
+            #device_data_array = self.model.objects(serial_number=device_id).batch_size(10000)
+            device_data_array = self.model.objects.aggregate({"$match": {"serial_number": device_id}})
+            result_data = 0
+            for device_data in device_data_array:
+                result_data += device_data['temperature']
+            data[device_id] = result_data
+
+        return data
+
     def create(self, data):
         serial_number = data['serial_number']
         temperature = data['temperature']
         unit = data['unit']
-        start_timestamp = data['start_timestamp']
-        end_timestamp = data['end_timestamp']
+        timestamp = data['timestamp']
 
-        # return self.model(payload=unit).save().to_json()
         return self.model(serial_number=serial_number, temperature=temperature, unit=unit,
-                          start_timestamp=start_timestamp, end_timestamp=end_timestamp).save()
+                          timestamp=timestamp).save()
 
     def dump_json(self, viking):
         result = {
