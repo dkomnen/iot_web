@@ -26,7 +26,8 @@ full_data = {
 while startTime < epochTime:
     data = {
         "timestamp": startTime,
-        "temperature": getRandomFloat(),
+        "sensor_reading": getRandomFloat(),
+        "sensor_type": "temperature",
         "unit": "c",
         "serial_number": "2"
 
