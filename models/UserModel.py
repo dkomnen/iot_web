@@ -1,9 +1,10 @@
 from mongoengine import *
 from models.RoleModel import Role
 from models.DeviceModel import Device
+from flask_security import UserMixin
 
 
-class User(Document):
+class User(Document, UserMixin):
     email = StringField(max_length=255)
     password = StringField(max_length=255)
     active = BooleanField(default=True)

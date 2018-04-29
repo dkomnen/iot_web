@@ -26,6 +26,7 @@ app.config['STATIC_FOLDER'] = "../static"
 app.config['SECURITY_REGISTERABLE'] = True
 app.config['SECURITY_PASSWORD_SALT'] = "randomsalt"
 app.config['SECURITY_CONFIRMABLE'] = False
+app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 #app.config['SECURITY_REGISTER_USER_TEMPLATE'] = "register_user.html"
 
 

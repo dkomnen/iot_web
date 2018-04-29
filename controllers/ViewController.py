@@ -1,5 +1,5 @@
 from server import app
-from flask import render_template
+from flask import render_template, session
 from flask_security import login_required
 from models.VikingModel import Viking
 
@@ -18,8 +18,10 @@ def login():
 
 
 @app.route("/power")
+@login_required
 def power():
-    return render_template("power.html")
+    user_id = session["user_id"]
+    return render_template("power.html", user_id=user_id)
 
 
     # @app.route('/register', methods=['GET', 'POST'])
