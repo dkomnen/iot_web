@@ -26,5 +26,6 @@ class VikingGraphResource(BaseResource):
     def post(self, resource_id=None):
         request_data = request.json
         device_ids = request_data['device_ids']
+        interval = request_data['interval']
 
-        return response_handler.success(self.resource_service.get_graph_data(device_ids=device_ids))
+        return response_handler.success(self.resource_service.get_graph_data(device_ids=device_ids, interval=interval))

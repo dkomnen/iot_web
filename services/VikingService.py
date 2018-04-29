@@ -1,5 +1,6 @@
 from services.BaseService import BaseService
 from models.VikingModel import Viking
+from utils.constants import graph_data_intervals
 import time
 
 
@@ -20,15 +21,16 @@ class VikingService(BaseService):
             data_sum += data['sensor_reading']
         return data_sum / counter
 
-    def get_graph_data(self, device_ids):
+    def get_graph_data(self, device_ids, interval):
         data = {}
         epoch_time = time.time()
+        interval_seconds = graph_data_intervals.get(interval, 3600)
         for device_id in device_ids:
             data[device_id] = []
             i = 1
             while i < 10:
-                search_start_time = epoch_time - i * 36000
-                search_end_time = epoch_time - (i - 1) * 36000
+                search_start_time = epoch_time - i * interval_seconds
+                search_end_time = epoch_time - (i - 1) * interval_seconds
                 x = self.model.objects.aggregate({"$match": {"serial_number": device_id,
                                                              "timestamp": {"$gte": search_start_time,
                                                                            "$lt": search_end_time}}})
