@@ -17,6 +17,11 @@ def login():
     return render_template("security/login_user.html")
 
 
+@app.route("/power")
+def power():
+    return render_template("power.html")
+
+
     # @app.route('/register', methods=['GET', 'POST'])
     # def register_test():
     #     return render_template("security/register_user.html")

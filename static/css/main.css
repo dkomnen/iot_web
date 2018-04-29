@@ -1,8 +1,22 @@
-.almond-background{
+/*---------STYLE OVERRIDES---------*/
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*---------MAIN CSS------------*/
+
+.almond-background {
     background-color: blanchedalmond;
 }
 
-.gray-background{
+.gray-background {
     background-color: gainsboro;
     margin-bottom: 20px !important;
     border-radius: 10px;
@@ -11,6 +25,6 @@
 
 }
 
-.full-height{
+.full-height {
     height: 100vw !important;
 }
