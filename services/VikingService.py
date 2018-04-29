@@ -9,10 +9,6 @@ class VikingService(BaseService):
         self.model = Viking
 
     def get_all(self):
-        response = []
-        data = []
-        # print self.model.objects.all()
-
         return self.model.objects.all()
 
     def get_average_data(self, viking):
@@ -26,35 +22,25 @@ class VikingService(BaseService):
 
     def get_graph_data(self, device_ids):
         data = {}
-        epochTime = time.time()
+        epoch_time = time.time()
         for device_id in device_ids:
             data[device_id] = []
-            # device_data_array = self.model.objects(serial_number=device_id).batch_size(10000)
-            # device_data_array = self.model.objects.aggregate({"$match": {"serial_number": device_id}, "$find": {"timestamp":{"$gte": searchStartTime, "$lt": searchEndTime}}})
             i = 1
             while i < 10:
-                print "WE ARE IN THE LOOP NOW"
-                searchStartTime = epochTime - i * 36000
-                searchEndTime = epochTime - (i - 1) * 36000
+                search_start_time = epoch_time - i * 36000
+                search_end_time = epoch_time - (i - 1) * 36000
                 x = self.model.objects.aggregate({"$match": {"serial_number": device_id,
-                                                             "timestamp": {"$gte": searchStartTime,
-                                                                           "$lt": searchEndTime}}})
+                                                             "timestamp": {"$gte": search_start_time,
+                                                                           "$lt": search_end_time}}})
 
-                # x = device_data_array.aggregate({"$find": {"timestamp":{"$gte": searchStartTime, "$lt": searchEndTime}}})
                 counter = 0
                 result_data = 0
                 for device_data in x:
                     result_data += device_data['sensor_reading']
                     counter += 1
-                data[device_id].append(result_data / counter)
+                if counter > 0:
+                    data[device_id].append(result_data / counter)
                 i += 1
-
-
-
-                # result_data = 0
-                # for device_data in device_data_array:
-                #     result_data += device_data['sensor_reading']
-                # data[device_id] = result_data
 
         return data
 
