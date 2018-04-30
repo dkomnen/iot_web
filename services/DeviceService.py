@@ -1,5 +1,6 @@
 from services.BaseService import BaseService
 from models.DeviceModel import Device
+from models.UserModel import User
 
 
 class DeviceService(BaseService):
@@ -9,6 +10,8 @@ class DeviceService(BaseService):
 
     def create(self, data):
         serial_number = data['serial_number']
+        device_type = data['device_type']
         name = data['name']
 
-        return self.model(serial_number=serial_number, name=name).save()
+        return self.model(serial_number=serial_number, name=name, device_type=device_type).save()
+

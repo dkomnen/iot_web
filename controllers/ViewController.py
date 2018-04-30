@@ -2,6 +2,8 @@ from server import app
 from flask import render_template, session
 from flask_security import login_required
 from models.VikingModel import Viking
+from services.VikingService import VikingService
+from services.UserService import UserService
 
 
 @app.route("/")
@@ -24,6 +26,10 @@ def power():
     return render_template("power.html", user_id=user_id)
 
 
-    # @app.route('/register', methods=['GET', 'POST'])
-    # def register_test():
-    #     return render_template("security/register_user.html")
+@app.route("/temperature")
+@login_required
+def temperature():
+    user_id = session["user_id"]
+    devices = UserService().get_by_user_id_and_type(user_id=user_id, device_type="temperature")
+    return render_template("temperature.html", user_id=user_id, devices=devices)
+

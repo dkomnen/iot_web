@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'includes/head.html' %}
+
+    <script>
+        window.onload = function () {
+            var dataPoints = [];
+            var dataLabels = [];
+            $.getJSON("/api/viking", function (data) {
+                data = $.parseJSON(data);
+                console.log(data[0]);
+                $.each(data, function (i, value) {
+                    dataPoints.push(value['temperature']);
+                    dataLabels.push(new Date(value['timestamp'] * 1000))
+                });
+                drawChart();
+            });
+            function drawChart() {
+                var ctx = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dataLabels,
+                        datasets: [{
+                            label: 'Temperature',
+                            data: dataPoints,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+                var ctx1 = document.getElementById("myChart1").getContext('2d');
+                var myChart1 = new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: dataLabels,
+                        datasets: [{
+                            label: 'Temperature',
+                            data: dataPoints,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+        }
+    </script>
+</head>
+<body class="hold-transition skin-black sidebar-mini">
+{% include 'includes/navbar.html' %}
+{{user_id}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 left-navbar almond-background full-height">
+            {% include 'includes/sidebar.html' %}
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-2">
+                    <form method="post" id=graph_data_form>
+                        {% for device in devices %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{device.serial_number}}" id="checkbox{{loop.index}}">
+                            <label class="form-check-label" for="checkbox{{loop.index}}">
+                                {{device.name}}
+                            </label>
+                        </div>
+                        {% endfor %}
+                        <input type="button" name="submit" value="Submit" onclick="submitDevices()"/>
+                    </form>
+                    <div id="myResponse"></div>
+                </div>
+                <div class="col-sm-10">
+                    <div id="chart-01">
+                        <canvas id="myChart" width="400" height="400"></canvas>
+
+                    </div>
+
+                    <br>
+                </div>
+
+                <div class="col-sm-12">
+                    <div id="chart-02">
+                        <canvas id="myChart1" width="400" height="400"></canvas>
+
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-sm-4">
+            <div id="chart-03"></div>
+            <br>
+        </div>
+
+        <div class="col-sm-4">
+            <div id="chart-04"></div>
+            <br>
+        </div>
+
+        <div class="col-sm-4">
+            <div id="chart-05"></div>
+            <br>
+        </div>
+
+    </div>
+    <hr>
+    <p class="small text-muted">Built with &#9829; by <a href="https://keen.io">Keen IO</a></p>
+</div>
+
+<!-- Project Analytics -->
+<script type="text/javascript" src="../../assets/js/keen-analytics.js"></script>
+</body>
+</body>
+</html>
