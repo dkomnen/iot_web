@@ -113,6 +113,27 @@ function submitDevices() {
 
 }
 
+function addDevice() {
+    var data = {
+        "serial_number": $("#device_serial_number").val(),
+        "name": $("#device_name").val(),
+        "device_type": "temperature"
+    };
+    var user_id = $("#my-data").data().userId;
+    console.log(user_id);
+    $.ajax({
+        type: "POST",
+        url: "api/user/"+ user_id +"/device",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data) {
+
+        }
+    });
+    return false;
+}
+
 function createDataset(dataPoints) {
     return {
         label: 'Temperature',
@@ -127,22 +148,22 @@ function createDataset(dataPoints) {
     }
 }
 
-function clearDataLabelDuplicates(dataLabels){
+function clearDataLabelDuplicates(dataLabels) {
     var seen = {};
     var out = [];
     var len = dataLabels.length;
     var j = 0;
-    for(var i = 0; i < len; i++) {
-         var item = dataLabels[i];
-         if(seen[item] !== 1) {
-               seen[item] = 1;
-               out[j++] = item;
-         }
+    for (var i = 0; i < len; i++) {
+        var item = dataLabels[i];
+        if (seen[item] !== 1) {
+            seen[item] = 1;
+            out[j++] = item;
+        }
     }
     return out;
 }
 
 function random_rgba() {
     var o = Math.round, r = Math.random, s = 255;
-    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
 }

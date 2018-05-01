@@ -8,6 +8,10 @@ class UserService(BaseService):
         super(UserService, self).__init__()
         self.model = User
 
+    def get_devices_by_user_id(self, user_id):
+        user = self.get_by_id(user_id)
+        return user.devices
+
     def get_device_by_user_id_and_type(self, user_id, device_type):
         devices = self.model.objects(id=user_id).devices
 

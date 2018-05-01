@@ -12,6 +12,7 @@ class DeviceService(BaseService):
         serial_number = data['serial_number']
         device_type = data['device_type']
         name = data['name']
+        status = "down"
 
-        return self.model(serial_number=serial_number, name=name, device_type=device_type).save()
+        return self.model(serial_number=serial_number, name=name, device_type=device_type, status=status).save()
 

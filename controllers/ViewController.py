@@ -23,7 +23,8 @@ def login():
 @login_required
 def power():
     user_id = session["user_id"]
-    return render_template("power.html", user_id=user_id)
+    devices = UserService().get_by_user_id_and_type(user_id=user_id, device_type="power")
+    return render_template("power.html", user_id=user_id, devices=devices)
 
 
 @app.route("/temperature")
@@ -33,3 +34,18 @@ def temperature():
     devices = UserService().get_by_user_id_and_type(user_id=user_id, device_type="temperature")
     return render_template("temperature.html", user_id=user_id, devices=devices)
 
+
+@app.route("/water")
+@login_required
+def water():
+    user_id = session["user_id"]
+    devices = UserService().get_by_user_id_and_type(user_id=user_id, device_type="water")
+    return render_template("water.html", user_id=user_id, devices=devices)
+
+
+@app.route("/devices")
+@login_required
+def devices():
+    user_id = session["user_id"]
+    devices = UserService().get_devices_by_user_id(user_id=user_id)
+    return render_template("manage_devices.html", user_id=user_id, devices=devices)
