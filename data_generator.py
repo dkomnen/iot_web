@@ -10,7 +10,7 @@ def getTimeEpoch():
 
 
 def getRandomFloat():
-    return random.randrange(20.0, 22.0)
+    return random.uniform(18.0, 22.0)
 
 
 timeInSeconds = 60 * 60 * 24 * 30
@@ -34,4 +34,3 @@ while startTime < epochTime:
     }
     startTime += 600
     r = requests.post("http://localhost:5000/api/viking", json=data)
-
