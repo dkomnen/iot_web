@@ -83,7 +83,9 @@ function submitDevices() {
     });
     var data = {
         device_ids: myCheckboxes,
-        interval: "weekly"
+        interval: "daily",
+        user_id: $("#my-data").data().userId
+
     };
     $.ajax({
         type: "POST",
@@ -93,6 +95,7 @@ function submitDevices() {
         dataType: 'json',
         success: function (data) {
             var result_string = "";
+            var index = 0;
             for (var key in data) {
                 result_string += key + " " + data[key] + "</br>";
                 var data_points_map = data[key];
@@ -102,8 +105,9 @@ function submitDevices() {
                     //dataLabels.push(data_points_key)
                     dataLabels.push(new Date(data_points_key * 1000))
                 }
-                dataSet.push(createDataset(data_set))
+                dataSet.push(createDataset(data_set, key, index));
                 dataLabels = clearDataLabelDuplicates(dataLabels)
+                index++;
             }
             $('#myResponse').html(result_string);
             drawChart();
@@ -123,7 +127,7 @@ function addDevice() {
     console.log(user_id);
     $.ajax({
         type: "POST",
-        url: "api/user/"+ user_id +"/device",
+        url: "api/user/" + user_id + "/device",
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
@@ -134,15 +138,15 @@ function addDevice() {
     return false;
 }
 
-function createDataset(dataPoints) {
+function createDataset(dataPoints, deviceName, index) {
     return {
-        label: 'Temperature',
+        label: deviceName,
         data: dataPoints,
         backgroundColor: [
-            random_rgba()
+            getColor(index)
         ],
         borderColor: [
-            random_rgba()
+            getColor(index)
         ],
         borderWidth: 1
     }
@@ -166,4 +170,15 @@ function clearDataLabelDuplicates(dataLabels) {
 function random_rgba() {
     var o = Math.round, r = Math.random, s = 255;
     return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+}
+
+function getColor(index) {
+    var colors = [
+        "rgba(255,100,100, 0.5)",
+        "rgba(100,255,100, 0.5)",
+        "rgba(100,100,255, 0.5)",
+        "rgba(250,240,0  , 0.5)"
+
+    ];
+    return colors[index];
 }

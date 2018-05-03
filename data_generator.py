@@ -26,10 +26,10 @@ full_data = {
 while startTime < epochTime:
     data = {
         "timestamp": startTime,
-        "sensor_reading": getRandomFloat(),
+        "sensor_reading": float('%.3f'%(getRandomFloat())),
         "sensor_type": "temperature",
         "unit": "c",
-        "serial_number": "2"
+        "serial_number": "3"
 
     }
     startTime += 600

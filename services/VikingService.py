@@ -1,8 +1,10 @@
 from services.BaseService import BaseService
 from models.VikingModel import Viking
+from models.DeviceModel import Device
 from utils.constants import graph_data_intervals
 import time
 import collections
+import math
 
 
 class VikingService(BaseService):
@@ -22,12 +24,13 @@ class VikingService(BaseService):
             data_sum += data['sensor_reading']
         return data_sum / counter
 
-    def get_graph_data(self, device_ids, interval):
+    def get_graph_data(self, device_ids, interval, user_id):
         data = {}
         epoch_time = time.time()
         interval_seconds = graph_data_intervals.get(interval, 3600)
         for device_id in device_ids:
-            data[device_id] = collections.OrderedDict()
+            device_name = Device.objects(serial_number=device_id)[0].name
+            data[device_name] = collections.OrderedDict()
             i = 1
             while i < 10:
                 search_start_time = epoch_time - i * interval_seconds
@@ -42,7 +45,7 @@ class VikingService(BaseService):
                     result_data += device_data['sensor_reading']
                     counter += 1
                 if counter > 0:
-                    data[device_id][search_end_time] = result_data / counter
+                    data[device_name][search_end_time] = '%.3f'%(result_data / counter)
                 i += 1
 
         return data
