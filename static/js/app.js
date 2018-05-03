@@ -138,6 +138,29 @@ function addDevice() {
     return false;
 }
 
+function editDevice() {
+    var device_id = "5ae8c792e89bdea63b78095a";
+    var data = {
+        "serial_number": $("#edit_device_serial_number").val(),
+        "name": $("#edit_device_name").val(),
+        "device_type": "temperature"
+    };
+    var user_id = $("#my-data").data().userId;
+    console.log(user_id);
+    $.ajax({
+        type: "POST",
+        url: "api/user/" + user_id + "/device/" + device_id,
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data) {
+            location.reload();
+            location.href = location.href;
+        }
+    });
+    return false;
+}
+
 function createDataset(dataPoints, deviceName, index) {
     return {
         label: deviceName,

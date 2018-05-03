@@ -16,3 +16,12 @@ class DeviceService(BaseService):
 
         return self.model(serial_number=serial_number, name=name, device_type=device_type, status=status).save()
 
+    def update(self, device_id, data):
+        serial_number = data['serial_number']
+        device_type = data['device_type']
+        name = data['name']
+
+        device = self.get_by_id(device_id)
+        device.update(serial_number=serial_number, name=name, device_type=device_type)
+        return device
+

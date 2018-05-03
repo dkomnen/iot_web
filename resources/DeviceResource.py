@@ -29,12 +29,15 @@ class UserDeviceResource(BaseResource):
     def get(self, resource_id=None):
         return response_handler.success(response_data=self.resource_service.get_all())
 
-    def post(self, user_id):
+    def post(self, user_id, device_id=None):
         request_data = request.json
 
         user = UserService().get_by_id(resource_id=user_id)
 
-        device = self.resource_service.create(request_data)
+        if device_id:
+            device = self.resource_service.update(device_id, request_data)
+        else:
+            device = self.resource_service.create(request_data)
         user.update(add_to_set__devices=device, upsert=True)
         user.save()
 
