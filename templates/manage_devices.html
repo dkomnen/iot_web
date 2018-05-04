@@ -8,9 +8,9 @@
 <div class="container-fluid">
     <div class="row" style="margin-top: 20px;">
         {% include 'includes/sidebar.html' %}
-        <div class="col-sm-9">
-            <div class="col-sm-4">
-                <form method="post" class="device-container">
+        <div class="col-sm-10">
+            <div class="device-container">
+                <form method="post">
                     <div class="form-group">
                         <label for="device_serial_number">SN:</label>
                         <input type="text" id="device_serial_number" name="device_serial_number" class="form-control">
@@ -26,22 +26,8 @@
                     <button type="button" class="btn btn-primary" onclick="addDevice()">Send your message</button>
                 </form>
             </div>
-            <div class="col-sm-4">
-                <!--<form method="post" class="device-container">-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="device_serial_number">SN:</label>-->
-                        <!--<input type="text" id="edit_device_serial_number" name="device_serial_number"-->
-                               <!--class="form-control">-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="device_name">Name:</label>-->
-                        <!--<input type="text" id="edit_device_name" name="device_name" class="form-control">-->
-                    <!--</div>-->
-                    <!--<button type="button" class="btn btn-primary" onclick="editDevice()">Edit Device</button>-->
-                <!--</form>-->
-            </div>
             {% for device in devices %}
-            <div class="device-container col-sm-4" id="device-container-{{loop.index}}">
+            <div class="device-container" id="device-container-{{loop.index}}">
                 {{device.serial_number}}
                 {{device.name}}
                 {% if device.status == "down"%}
@@ -49,10 +35,11 @@
                 {% else %}
                 <span class="alert">{{device.status}}</span>
                 {% endif %}
-                <button type="button" class="btn btn-primary" onclick="showEditDevice('{{loop.index}}')">Edit Device</button>
+                <button type="button" class="btn btn-primary" onclick="showEditDevice('{{loop.index}}')">Edit Device
+                </button>
             </div>
-             <div class="col-sm-4" id="edit-device-container-{{loop.index}}" style="display: none">
-                <form method="post" class="device-container">
+            <div class="device-container" id="edit-device-container-{{loop.index}}" style="display: none">
+                <form method="post">
                     <div class="form-group">
                         <label for="device_serial_number">SN:</label>
                         <input type="text" id="edit_device_serial_number" name="device_serial_number"
@@ -62,7 +49,8 @@
                         <label for="device_name">Name:</label>
                         <input type="text" id="edit_device_name" name="device_name" class="form-control">
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="editDevice('{{device.id}}')">Edit Device</button>
+                    <button type="button" class="btn btn-primary" onclick="editDevice('{{device.id}}')">Edit Device
+                    </button>
                 </form>
             </div>
             {% endfor %}

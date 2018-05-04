@@ -20,10 +20,7 @@ a:hover {
     background-color: gainsboro;
     margin-bottom: 20px !important;
     border-radius: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
     box-shadow: 2px 2px 2px darkgrey;
-
 }
 
 .full-height {
@@ -31,6 +28,15 @@ a:hover {
 }
 
 .device-container{
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px darkgrey;
+    background-color: white;
+    /*border-radius: 10px;*/
+    box-shadow: 2px 2px 5px darkgrey;
+    border-color: black;
+    height: 15vw;
+    width: 28%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    float: left;
+    padding: 5px 10px 5px 10px;
 }
