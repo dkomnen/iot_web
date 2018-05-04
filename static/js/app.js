@@ -138,8 +138,16 @@ function addDevice() {
     return false;
 }
 
-function editDevice() {
-    var device_id = "5ae8c792e89bdea63b78095a";
+function showEditDevice(index) {
+    console.log(index);
+    $("#device-container-" + index).hide();
+    $("#edit-device-container-" + index).show();
+
+}
+
+function editDevice(device_id) {
+    //var device_id = "5ae8c792e89bdea63b78095a";
+    console.log(device_id);
     var data = {
         "serial_number": $("#edit_device_serial_number").val(),
         "name": $("#edit_device_name").val(),
