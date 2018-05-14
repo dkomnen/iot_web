@@ -83,7 +83,7 @@ function submitDevices() {
     });
     var data = {
         device_ids: myCheckboxes,
-        interval: "daily",
+        interval: $("#interval-select").val(),
         user_id: $("#my-data").data().userId
 
     };
@@ -109,7 +109,6 @@ function submitDevices() {
                 dataLabels = clearDataLabelDuplicates(dataLabels)
                 index++;
             }
-            $('#myResponse').html(result_string);
             drawChart();
         }
     });
@@ -138,11 +137,21 @@ function addDevice() {
     return false;
 }
 
-function showEditDevice(index) {
+function showEditDevice(index, device_type) {
     console.log(index);
     $("#device-container-" + index).hide();
     $("#edit-device-container-" + index).show();
-
+    switch (device_type) {
+        case "temperature":
+            $("#edit-device-container-radio-temperature-" + index).prop("checked", true);
+            break;
+        case "power":
+            $("#edit-device-container-radio-power-" + index).prop("checked", true);
+            break;
+        case "water":
+            $("#edit-device-container-radio-water-" + index).prop("checked", true);
+            break;
+    }
 }
 
 function editDevice(device_id) {

@@ -5,26 +5,37 @@
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 {% include 'includes/navbar.html' %}
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 11px;">
     <div class="row">
-            {% include 'includes/sidebar.html' %}
-        <div class="col-sm-9">
+        {% include 'includes/sidebar.html' %}
+        <div class="col-sm-9 content-div">
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-3 form-container">
                     <form method="post" id=graph_data_form>
                         {% for device in devices %}
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="{{device.serial_number}}" id="checkbox{{loop.index}}">
+                            <input class="form-check-input" type="checkbox" value="{{device.serial_number}}"
+                                   id="checkbox{{loop.index}}">
                             <label class="form-check-label" for="checkbox{{loop.index}}" id="label{{loop.index}}">
                                 {{device.name}}
                             </label>
                         </div>
                         {% endfor %}
-                        <input type="button" name="submit" value="Submit" onclick="submitDevices()"/>
+                        <div class="form-group">
+                            <label for="interval-select">Interval</label>
+                            <select class="form-control" id="interval-select">
+                                <option value="hourly">Hourly</option>
+                                <option value="bi-daily">Bi-Daily</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                        <input type="button" class= "btn btn-primary" name="submit" value="Submit" onclick="submitDevices()"/>
                     </form>
                     <div id="myResponse"></div>
                 </div>
-                <div class="col-sm-10">
+                <div class="col-sm-8">
                     <div id="chart-01">
                         <canvas id="myChart" width="400" height="400"></canvas>
 

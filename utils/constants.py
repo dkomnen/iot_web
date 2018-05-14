@@ -1,5 +1,5 @@
 graph_data_intervals = {
-    "hour": 3600,
+    "hourly": 3600,
     "bi-daily": 43200,
     "daily": 86400,
     "weekly": 604800,

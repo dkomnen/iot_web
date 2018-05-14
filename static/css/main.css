@@ -12,15 +12,19 @@ a:hover {
 
 /*---------MAIN CSS------------*/
 
-.almond-background {
+.sidebar {
+    padding-top: 10px;
     background-color: blanchedalmond;
+    padding-left: 0px !important;
 }
 
-.gray-background {
+.sidebar-button {
     background-color: gainsboro;
     margin-bottom: 20px !important;
-    border-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     box-shadow: 2px 2px 2px darkgrey;
+    padding-left: 20px;
 }
 
 .full-height {
@@ -32,11 +36,31 @@ a:hover {
     /*border-radius: 10px;*/
     box-shadow: 2px 2px 5px darkgrey;
     border-color: black;
-    height: 15vw;
+    height: 22vw;
     width: 28%;
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 2%;
     float: left;
     padding: 5px 10px 5px 10px;
+}
+
+.form-container{
+    background-color: white;
+    /*border-radius: 10px;*/
+    box-shadow: 2px 2px 5px darkgrey;
+    border-color: black;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    float: left;
+    padding: 5px 10px 5px 10px;
+}
+
+.form-check{
+    display: inline-block;
+}
+
+.content-div{
+    padding-top: 10px;
 }
