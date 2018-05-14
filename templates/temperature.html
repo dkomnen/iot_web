@@ -31,7 +31,16 @@
                                 <option value="monthly">Monthly</option>
                             </select>
                         </div>
-                        <input type="button" class= "btn btn-primary" name="submit" value="Submit" onclick="submitDevices()"/>
+                        <div class="form-group">
+                            <label for="chart-min">Chart Minimum:</label>
+                            <input type="number" id="chart-min" name="device_name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="chart-max">Chart Maximum:</label>
+                            <input type="number" id="chart-max" name="device_name" class="form-control">
+                        </div>
+                        <input type="button" class="btn btn-primary" name="submit" value="Submit"
+                               onclick="submitDevices()"/>
                     </form>
                     <div id="myResponse"></div>
                 </div>

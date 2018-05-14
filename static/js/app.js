@@ -17,6 +17,8 @@ var dataLabels = [];
 // };
 
 function drawChart() {
+    var chartMin = $("#chart-min").val();
+    var chartMax = $("#chart-max").val();
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'line',
@@ -29,7 +31,9 @@ function drawChart() {
                 yAxes: [{
                     ticks: {
                         //beginAtZero: true
-                        suggestedMin: 20
+                        suggestedMin: 20,
+                        min: parseFloat(chartMin),
+                        max: parseFloat(chartMax)
                     }
                 }]
             }

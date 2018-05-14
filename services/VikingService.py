@@ -46,7 +46,11 @@ class VikingService(BaseService):
                     counter += 1
                 if counter > 0:
                     data[device_name][search_end_time] = '%.3f'%(result_data / counter)
+                else:
+                    data[device_name][search_end_time] = 0
                 i += 1
+        for key, value in data.items():
+            data[key] = collections.OrderedDict(reversed(data[key].items()))
 
         return data
 
