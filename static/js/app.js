@@ -3,18 +3,6 @@
  */
 var dataSet = [];
 var dataLabels = [];
-// window.onload = function () {
-//
-//     $.getJSON("/api/viking/graph_data", function (data) {
-//         data = $.parseJSON(data);
-//         console.log(data[0]);
-//         $.each(data, function (i, value) {
-//             dataPoints.push(value['temperature']);
-//             dataLabels.push(new Date(value['timestamp'] * 1000))
-//         });
-//         drawChart();
-//     });
-// };
 
 function drawChart() {
     var chartMin = $("#chart-min").val();
@@ -39,43 +27,6 @@ function drawChart() {
             }
         }
     });
-    // var ctx1 = document.getElementById("myChart1").getContext('2d');
-    // var myChart1 = new Chart(ctx1, {
-    //     type: 'line',
-    //     data: {
-    //         labels: dataLabels,
-    //         datasets: [{
-    //             label: 'Temperature',
-    //             data: dataPoints,
-    //             backgroundColor: [
-    //                 'rgba(255, 99, 132, 0.2)',
-    //                 'rgba(54, 162, 235, 0.2)',
-    //                 'rgba(255, 206, 86, 0.2)',
-    //                 'rgba(75, 192, 192, 0.2)',
-    //                 'rgba(153, 102, 255, 0.2)',
-    //                 'rgba(255, 159, 64, 0.2)'
-    //             ],
-    //             borderColor: [
-    //                 'rgba(255,99,132,1)',
-    //                 'rgba(54, 162, 235, 1)',
-    //                 'rgba(255, 206, 86, 1)',
-    //                 'rgba(75, 192, 192, 1)',
-    //                 'rgba(153, 102, 255, 1)',
-    //                 'rgba(255, 159, 64, 1)'
-    //             ],
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             yAxes: [{
-    //                 ticks: {
-    //                     beginAtZero: true
-    //                 }
-    //             }]
-    //         }
-    //     }
-    // });
 }
 
 function submitDevices() {

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message DeviceReading {
+  string sensor_type = 1;
+  int64 timestamp = 2;
+  float sensor_reading = 3;
+  string unit = 4;
+  string serial_number = 5;
+}

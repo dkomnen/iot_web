@@ -4,6 +4,7 @@ flask-mongoengine
 flask-security
 bcrypt
 bson
+paho-mqtt
 
 pymongo
 mongoengine

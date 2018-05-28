@@ -3,6 +3,8 @@ from flask_restful import Resource, Api
 from flask_login import LoginManager
 from flask_mongoengine import MongoEngine
 from flask_security import Security, MongoEngineUserDatastore
+from paho.mqtt.client import *
+from mqtt import MqttClient
 from models.UserModel import User
 from models.RoleModel import Role
 
@@ -33,6 +35,8 @@ app.config['SECURITY_SEND_REGISTER_EMAIL'] = False
 db = MongoEngine(app)
 user_datastore = MongoEngineUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
+
+#mqttClient = Client(client_id="", clean_session=True, userdata=None, protocol=MQTTv311, transport="tcp")
 
 
 from controllers import ApiController, ViewController
