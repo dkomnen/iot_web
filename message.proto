@@ -7,3 +7,8 @@ message DeviceReading {
   string unit = 4;
   string serial_number = 5;
 }
+
+message DeviceStatus {
+  string serial_number = 1;
+  bool device_status = 2;
+}
