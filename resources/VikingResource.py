@@ -29,4 +29,17 @@ class VikingGraphResource(BaseResource):
         interval = request_data['interval']
         user_id = request_data['user_id']
 
-        return response_handler.success(self.resource_service.get_graph_data(device_ids=device_ids, interval=interval, user_id=user_id))
+        return response_handler.success(
+            self.resource_service.get_graph_data(device_ids=device_ids, interval=interval, user_id=user_id))
+
+
+class VikingStatus(BaseResource):
+    def __init__(self):
+        super(VikingStatus, self).__init__()
+        self.resource_service = VikingService()
+
+    def post(self, resource_id=None):
+        #request_data = request.json
+        #print request_data
+        #device_serial_numbers = request_data["device_serial_numbers"]
+        return response_handler.success(self.resource_service.get_devices_status())

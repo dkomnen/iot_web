@@ -1,6 +1,7 @@
 from services.BaseService import BaseService
 from models.VikingModel import Viking
 from models.DeviceModel import Device
+from models.DeviceStatusModel import DeviceStatus
 from utils.constants import graph_data_intervals
 import time
 import collections
@@ -45,7 +46,7 @@ class VikingService(BaseService):
                     result_data += device_data['sensor_reading']
                     counter += 1
                 if counter > 0:
-                    data[device_name][search_end_time] = '%.3f'%(result_data / counter)
+                    data[device_name][search_end_time] = '%.3f' % (result_data / counter)
                 else:
                     data[device_name][search_end_time] = 0
                 i += 1
@@ -53,6 +54,13 @@ class VikingService(BaseService):
             data[key] = collections.OrderedDict(reversed(data[key].items()))
 
         return data
+
+    def get_devices_status(self):
+        devices_status = DeviceStatus.objects.all()
+        resp = []
+        for device_status in devices_status:
+            resp.append({"serial_number": device_status.serial_number, "status": device_status.status})
+        return resp
 
     def create(self, data):
         serial_number = data['serial_number']

@@ -3,6 +3,7 @@
  */
 var dataSet = [];
 var dataLabels = [];
+var device_serial_numbers = [];
 
 function drawChart() {
     var chartMin = $("#chart-min").val();
@@ -49,6 +50,7 @@ function submitDevices() {
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (data) {
+            device_serial_numbers = data["device_ids"];
             var result_string = "";
             var index = 0;
             for (var key in data) {
@@ -176,4 +178,31 @@ function getColor(index) {
 
     ];
     return colors[index];
+}
+
+function getDeviceStatus() {
+    console.log(device_serial_numbers);
+    $.ajax({
+        type: "POST",
+        url: "api/viking/status",
+        data: JSON.stringify(device_serial_numbers),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var key in data) {
+                var device = data[key];
+                console.log(device);
+                if (device["status"] == true) {
+                    $("#" + device["serial_number"] + "-status-up").show();
+                    $("#" + device["serial_number"] + "-status-down").hide();
+
+                } else {
+                    $("#" + device["serial_number"] + "-status-up").hide();
+                    $("#" + device["serial_number"] + "-status-down").show();
+                }
+            }
+        }
+    });
+    return false;
 }

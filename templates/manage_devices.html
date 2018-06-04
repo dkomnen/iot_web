@@ -9,6 +9,11 @@
     <div class="row">
         {% include 'includes/sidebar.html' %}
         <div class="col-sm-10 content-div">
+            <div class="row">
+                <div class="col-sm-2 offset-sm-10">
+                    <button class="btn btn-primary" onclick="getDeviceStatus()"></button>
+                </div>
+            </div>
             <div class="device-container">
                 <form method="post">
                     <div class="form-group">
@@ -34,7 +39,8 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radio" id="device-container-radio-temperature"
+                        <input class="form-check-input" type="radio" name="radio"
+                               id="device-container-radio-temperature"
                                value="temperature">
                         <label class="form-check-label" for="device-container-radio-temperature">
                             Thermometer
@@ -48,11 +54,14 @@
                 {{device.serial_number}}
                 {{device.name}}
                 {% if device.status == "down"%}
-                <span class="alert-danger">{{device.status}}</span>
+                <span class="alert alert-danger" id="{{device.serial_number}}-status-down">down</span>
+                <span class="alert alert-success" id="{{device.serial_number}}-status-up" hidden>up</span>
                 {% else %}
-                <span class="alert">{{device.status}}</span>
+                <span class="alert alert-danger" id="{{device.serial_number}}-status-down">down</span>
+                <span class="alert alert-success" id="{{device.serial_number}}-status-up">up</span>
                 {% endif %}
-                <button type="button" class="btn btn-primary" onclick="showEditDevice('{{loop.index}}', '{{device.device_type}}')">Edit Device
+                <button type="button" class="btn btn-primary"
+                        onclick="showEditDevice('{{loop.index}}', '{{device.device_type}}')">Edit Device
                 </button>
             </div>
             <div class="device-container" id="edit-device-container-{{loop.index}}" style="display: none">
@@ -69,21 +78,24 @@
                                class="form-control">
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radio" id="edit-device-container-radio-power-{{loop.index}}"
+                        <input class="form-check-input" type="radio" name="radio"
+                               id="edit-device-container-radio-power-{{loop.index}}"
                                value="power">
                         <label class="form-check-label" for="edit-device-container-radio-power-{{loop.index}}">
                             Power
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radio" id="edit-device-container-radio-water-{{loop.index}}"
+                        <input class="form-check-input" type="radio" name="radio"
+                               id="edit-device-container-radio-water-{{loop.index}}"
                                value="water">
                         <label class="form-check-label" for="edit-device-container-radio-water-{{loop.index}}">
                             Water
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="radio" id="edit-device-container-radio-temperature-{{loop.index}}"
+                        <input class="form-check-input" type="radio" name="radio"
+                               id="edit-device-container-radio-temperature-{{loop.index}}"
                                value="temperature">
                         <label class="form-check-label" for="edit-device-container-radio-temperature-{{loop.index}}">
                             Thermometer
