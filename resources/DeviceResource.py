@@ -42,3 +42,14 @@ class UserDeviceResource(BaseResource):
         user.save()
 
         return response_handler.success(response_data=device.to_json())
+
+
+class DeviceRemoteControlResource(BaseResource):
+    def __init__(self):
+        super(DeviceRemoteControlResource, self).__init__()
+        self.resource_service = DeviceService()
+
+    def post(self, status, device_id):
+        self.resource_service.remote_control_device(device_id=device_id, status=status)
+
+        return response_handler.success("Success")

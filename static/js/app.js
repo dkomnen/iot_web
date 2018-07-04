@@ -60,7 +60,7 @@ function submitDevices() {
                 for (var data_points_key in data_points_map) {
                     data_set.push(data_points_map[data_points_key]);
                     //dataLabels.push(data_points_key)
-                    dataLabels.push(new Date(data_points_key * 1000))
+                    dataLabels.push(new Date(data_points_key * 1000).toDateString())
                 }
                 dataSet.push(createDataset(data_set, key, index));
                 dataLabels = clearDataLabelDuplicates(dataLabels)
@@ -71,6 +71,19 @@ function submitDevices() {
     });
     return false;
 
+}
+
+function remoteControlDevice(status, device_id) {
+    $.ajax({
+        type: "POST",
+        url: "api/device/" + device_id + "/" + status,
+        //data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data) {
+
+        }
+    });
 }
 
 function addDevice() {
@@ -88,7 +101,6 @@ function addDevice() {
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (data) {
-
         }
     });
     return false;
@@ -181,7 +193,6 @@ function getColor(index) {
 }
 
 function getDeviceStatus() {
-    console.log(device_serial_numbers);
     $.ajax({
         type: "POST",
         url: "api/viking/status",
@@ -192,14 +203,19 @@ function getDeviceStatus() {
             console.log(data);
             for (var key in data) {
                 var device = data[key];
+                console.log(data);
                 console.log(device);
+                console.log("#" + device["serial_number"] + "-status-up")
                 if (device["status"] == true) {
-                    $("#" + device["serial_number"] + "-status-up").show();
-                    $("#" + device["serial_number"] + "-status-down").hide();
-
+                    $("#" + $.escapeSelector(device["serial_number"] + "-status-up")).show();
+                    $("#" + $.escapeSelector(device["serial_number"] + "-status-down")).hide();
+                    $("#" + $.escapeSelector(device["serial_number"] + "-remote-button-off")).show();
+                    $("#" + $.escapeSelector(device["serial_number"] + "-remote-button-on")).hide();
                 } else {
-                    $("#" + device["serial_number"] + "-status-up").hide();
-                    $("#" + device["serial_number"] + "-status-down").show();
+                    $("#" + $.escapeSelector(device["serial_number"] + "-status-up")).hide();
+                    $("#" + $.escapeSelector(device["serial_number"] + "-status-down")).show();
+                    $("#" + $.escapeSelector(device["serial_number"] + "-remote-button-off")).hide();
+                    $("#" + $.escapeSelector(device["serial_number"] + "-remote-button-on")).show();
                 }
             }
         }

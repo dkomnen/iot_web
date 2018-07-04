@@ -1,6 +1,7 @@
 from services.BaseService import BaseService
 from models.UserModel import User
 from models.DeviceModel import Device
+from models.DeviceStatusModel import DeviceStatus
 
 
 class UserService(BaseService):
@@ -10,7 +11,13 @@ class UserService(BaseService):
 
     def get_devices_by_user_id(self, user_id):
         user = self.get_by_id(user_id)
-        return user.devices
+        devices = user.devices
+        for device in devices:
+            device_status = DeviceStatus.objects(serial_number=device.serial_number).first()
+            if device_status is not None:
+                device.status = device_status.status
+
+        return devices
 
     def get_device_by_user_id_and_type(self, user_id, device_type):
         devices = self.model.objects(id=user_id).devices

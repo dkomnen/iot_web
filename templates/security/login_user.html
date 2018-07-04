@@ -6,56 +6,42 @@
 
 </head>
 <body>
-
-<!--<div class="container">-->
-
-    <!--<form action="/login" method="POST" name="login_user_form" class="form-signin">-->
-        <!--<input id="next" name="next" type="hidden" value="">-->
-        <!--<input id="csrf_token" name="csrf_token" type="hidden"-->
-               <!--value="ImI3YjBmYzc0ZjU0N2IwYTU5MzIxOGQ2NzMxNTllZjYyNTczZjQ1MDAi.DYl6Vg.xp4OGXL5Ne2GW0akf63FTJ-vsAc">-->
-        <!--<h2 class="form-signin-heading">Please sign in</h2>-->
-
-        <!--<label for="email" class="sr-only">Email address</label>-->
-        <!--<input type="email" id="email" class="form-control" placeholder="Email address" required="" autofocus="">-->
-
-        <!--<label for="password" class="sr-only">Password</label>-->
-        <!--<input type="password" id="password" class="form-control" placeholder="Password" required="">-->
-
-        <!--<div class="checkbox">-->
-            <!--<label>-->
-                <!--<input type="checkbox" value="remember-me"> Remember me-->
-            <!--</label>-->
-        <!--</div>-->
-        <!--<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
-    <!--</form>-->
-
-<!--</div> -->
-{% from "security/_macros.html" import render_field_with_errors, render_field %}
-{% include "security/_messages.html" %}
-<h1>{{ _('Login') }}</h1>
-<form action="{{ url_for_security('login') }}" method="POST" name="login_user_form" class="form-signin">
-  {{ login_user_form.hidden_tag() }}
-    <div class="form-group">
-        <label for="email">Email address</label>
-        {{ login_user_form.email(class='form-control', placeholder='email address') }}
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        {{ login_user_form.password(class='form-control', placeholder='password') }}
-    </div>
-    <div class="form-group">
-        <div class="col-md-12">
-            <div class="checkbox">
-                <label>
-                    {{ login_user_form.remember }} {{ login_user_form.remember.label }}
-                </label>
+<div class="container">
+    <div class="row">{% from "security/_macros.html" import render_field_with_errors, render_field %}
+        {% include "security/_messages.html" %}
+        <h1 style="text-align: center">{{ _('Login') }}</h1>
+        <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form" class="form-signin">
+            {{ login_user_form.hidden_tag() }}
+            <div class="form-group">
+                <label for="email">Email address</label>
+                {{ login_user_form.email(class='form-control', placeholder='email address') }}
             </div>
-            {{ login_user_form.submit(class='btn btn-lg btn-primary btn-block') }}
-        </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                {{ login_user_form.password(class='form-control', placeholder='password') }}
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="checkbox">
+                        <label>
+                            {{ login_user_form.remember }} {{ login_user_form.remember.label }}
+                        </label>
+                    </div>
+                    {{ login_user_form.submit(class='btn btn-lg btn-primary btn-block') }}
+                    {% if security.registerable %}
+                    <a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">Don't
+                        have an account yet? {{
+                        _('Register') }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
     </div>
-</form>
-{% include "security/_menu.html" %}
 
+    <!--<div class="row">-->
+    <!--{% include "security/menu.html" %}-->
+    <!--</div>-->
+</div>
 <!-- /container -->
 
 
@@ -64,37 +50,5 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
-
-
-<!--<h1>Login</h1>-->
-<!--<form action="/login" method="POST" name="login_user_form">-->
-    <!--<input id="next" name="next" type="hidden" value="">-->
-    <!--<input id="csrf_token" name="csrf_token" type="hidden"-->
-           <!--value="ImI3YjBmYzc0ZjU0N2IwYTU5MzIxOGQ2NzMxNTllZjYyNTczZjQ1MDAi.DYl6Vg.xp4OGXL5Ne2GW0akf63FTJ-vsAc">-->
-
-    <!--<p>-->
-        <!--<label for="email">Email Address</label> <input id="email" name="email" type="text" value="">-->
-
-    <!--</p>-->
-
-
-    <!--<p>-->
-        <!--<label for="password">Password</label> <input id="password" name="password" type="password" value="">-->
-
-    <!--</p>-->
-
-
-    <!--<p>-->
-        <!--<label for="remember">Remember Me</label> <input id="remember" name="remember" type="checkbox" value="y">-->
-
-    <!--</p>-->
-
-
-    <!--<p><input id="next" name="next" type="hidden" value=""></p>-->
-
-
-    <!--<p><input id="submit" name="submit" type="submit" value="Login"></p>-->
-
-<!--</form>-->
 </body>
 </html>

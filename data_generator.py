@@ -29,7 +29,7 @@ while startTime < epochTime:
         "sensor_reading": float('%.3f'%(getRandomFloat())),
         "sensor_type": "temperature",
         "unit": "c",
-        "serial_number": "3"
+        "serial_number": "52:7d:e6:ef:2a:8a"
 
     }
     startTime += 600

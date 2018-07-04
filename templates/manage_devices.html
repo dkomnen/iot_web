@@ -51,14 +51,23 @@
             </div>
             {% for device in devices %}
             <div class="device-container" id="device-container-{{loop.index}}">
-                {{device.serial_number}}
-                {{device.name}}
-                {% if device.status == "down"%}
-                <span class="alert alert-danger" id="{{device.serial_number}}-status-down">down</span>
-                <span class="alert alert-success" id="{{device.serial_number}}-status-up" hidden>up</span>
-                {% else %}
-                <span class="alert alert-danger" id="{{device.serial_number}}-status-down">down</span>
-                <span class="alert alert-success" id="{{device.serial_number}}-status-up">up</span>
+                <label>SN:</label>{{device.serial_number}}</br>
+                <label>Device Name:</label>{{device.name}}</br>
+                <label>Device Status:</label>
+                {% if device.status == False %}
+                <span class="alert alert-danger" style="padding: 3px !important;" id="{{device.serial_number}}-status-down">down</span>
+                <span class="alert alert-success" style="padding: 3px !important;" id="{{device.serial_number}}-status-up" hidden>up</span>
+                            </br>
+                <button type="button" class="btn btn-primary" onclick="remoteControlDevice('up', '{{device.serial_number}}')">
+                    power
+                </button>
+                {% elif device.status == True %}
+                <span class="alert alert-danger" style="padding: 3px !important;" id="{{device.serial_number}}-status-down" hidden>down</span>
+                <span class="alert alert-success" style="padding: 3px !important;" id="{{device.serial_number}}-status-up">up</span>
+                            </br>
+                <button type="button" class="btn btn-primary" onclick="remoteControlDevice('down', '{{device.serial_number}}')">
+                    power
+                </button>
                 {% endif %}
                 <button type="button" class="btn btn-primary"
                         onclick="showEditDevice('{{loop.index}}', '{{device.device_type}}')">Edit Device

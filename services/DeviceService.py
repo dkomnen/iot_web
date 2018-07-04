@@ -1,6 +1,7 @@
 from services.BaseService import BaseService
 from models.DeviceModel import Device
-from models.UserModel import User
+from models.DeviceStatusModel import DeviceStatus
+from mqtt.MqttClient import client
 
 
 class DeviceService(BaseService):
@@ -25,3 +26,11 @@ class DeviceService(BaseService):
         device.update(serial_number=serial_number, name=name, device_type=device_type)
         return device
 
+    def remote_control_device(self, device_id, status):
+        device = DeviceStatus.objects(serial_number=device_id).first()
+        if device.status is True:
+            print "PUBLISHING TO TOPIC " + device_id + "/remote_shutdown"
+            client.publish(device_id + "/remote_shutdown", "remote_control")
+        elif device.status is False:
+            print "PUBLISHING TO TOPIC " + device_id + "/remote_poweron"
+            client.publish(device_id + "/remote_poweron", "remote_control")
