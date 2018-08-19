@@ -8,7 +8,7 @@ class BaseService(object):
         self.not_found_exception = None
 
     def get_by_id(self, resource_id):
-        return self.model.objects(pk=resource_id)[0]
+        return self.model.objects(id=resource_id)[0]
 
     def get_all(self):
         return self.model.objects.all()

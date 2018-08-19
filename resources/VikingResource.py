@@ -39,7 +39,4 @@ class VikingStatus(BaseResource):
         self.resource_service = VikingService()
 
     def post(self, resource_id=None):
-        #request_data = request.json
-        #print request_data
-        #device_serial_numbers = request_data["device_serial_numbers"]
         return response_handler.success(self.resource_service.get_devices_status())

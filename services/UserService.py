@@ -19,11 +19,8 @@ class UserService(BaseService):
 
         return devices
 
-    def get_device_by_user_id_and_type(self, user_id, device_type):
-        devices = self.model.objects(id=user_id).devices
-
     def get_by_user_id_and_type(self, user_id, device_type):
-        #devices = Device.objects(device_type=device_type, user__in=(self.model.objects.filter(id=user_id).all()))
+        # devices = Device.objects(device_type=device_type, user__in=(self.model.objects.filter(id=user_id).all()))
         devices = self.get_by_id(resource_id=user_id).devices
         result = []
         for device in devices:
@@ -31,5 +28,3 @@ class UserService(BaseService):
                 result.append(device)
         print result
         return result
-
-
